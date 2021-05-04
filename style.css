@@ -1,0 +1,23 @@
+/* Hides & styles the popup warning users of draft submissions - Izzy 2021 */
+.tca-draft-popup {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+    box-shadow: 2px 2px 10px 1px black;
+}
+
+.tca-draft-title-wrap {
+    background: white;
+    border: 2px solid hsl(0, 0%, 91%);
+    border-bottom: 0;
+    padding: 0.3em;
+}
+
+.tca-draft-body {
+    background: white;
+    padding: 0.9em;
+    border: 2px solid hsl(0, 0%, 91%);
+}

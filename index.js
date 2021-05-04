@@ -22,7 +22,7 @@ Izzy MG, TCA LMS Admin
             throw "TCA Draft Popup element not found in page";
         }
 
-        popup.style.hidden = false;
+        popup.style.display = "block";
     }
 
     if(!isDraftSubmission()) {

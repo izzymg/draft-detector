@@ -6,6 +6,8 @@ Izzy MG, TCA LMS Admin
 */
 
 (function() {
+    const NEVER_SHOW_KEY = "tca-draft-nevershow";
+
     /**
      * Returns true if current page has a draft submission on it.
     */
@@ -22,10 +24,26 @@ Izzy MG, TCA LMS Admin
             throw "TCA Draft Popup element not found in page";
         }
 
+        // Dismiss popup on OK
+        document.querySelector(".tca-draft-ok").addEventListener("click", function() {
+            popup.style.display = "none";
+        });
+
+        // Never show functionality
+        document.querySelector(".tca-draft-nevershow").addEventListener("click", function() {
+            popup.style.display = "none";
+            window.localStorage.setItem(NEVER_SHOW_KEY, "true");
+        });
+
         popup.style.display = "block";
     }
 
-    if(!isDraftSubmission()) {
+    /** Returns true if the popup is set to never show again */
+    function isNeverShow() {
+        return window.localStorage.getItem(NEVER_SHOW_KEY) ? true : false;
+    }
+
+    if(!isDraftSubmission() || isNeverShow()) {
         return;
     }
 

@@ -25,8 +25,12 @@ Izzy MG, TCA LMS Admin
             throw "TCA Draft Popup element not found in page";
         }
 
-        // Mark expiry time when popup is dismissed
         document.querySelector(".tca-draft-ok").addEventListener("click", function() {
+            popup.style.display = "none";
+        });
+
+        // Mark expiry time when popup is dismissed
+        document.querySelector(".tca-draft-dismiss").addEventListener("click", function() {
             popup.style.display = "none";
             window.localStorage.setItem(TTL_KEY, new Date().getTime() + KEY_TTL);
         });

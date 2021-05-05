@@ -6,7 +6,8 @@ Izzy MG, TCA LMS Admin
 */
 
 (function() {
-    const NEVER_SHOW_KEY = "tca-draft-nevershow";
+    const TTL_KEY = "tca-draft-nevershow";
+    const KEY_TTL = 24 * 60 * 60 * 1000;
 
     /**
      * Returns true if current page has a draft submission on it.
@@ -24,26 +25,29 @@ Izzy MG, TCA LMS Admin
             throw "TCA Draft Popup element not found in page";
         }
 
-        // Dismiss popup on OK
+        // Mark expiry time when popup is dismissed
         document.querySelector(".tca-draft-ok").addEventListener("click", function() {
             popup.style.display = "none";
-        });
-
-        // Never show functionality
-        document.querySelector(".tca-draft-nevershow").addEventListener("click", function() {
-            popup.style.display = "none";
-            window.localStorage.setItem(NEVER_SHOW_KEY, "true");
+            window.localStorage.setItem(TTL_KEY, new Date().getTime() + KEY_TTL);
         });
 
         popup.style.display = "block";
     }
 
-    /** Returns true if the popup is set to never show again */
-    function isNeverShow() {
-        return window.localStorage.getItem(NEVER_SHOW_KEY) ? true : false;
+    /** Returns true if it's been a day since local storage records dismissal of the popup */
+    function shouldShowPopup() {
+        const expiry = window.localStorage.getItem(TTL_KEY);
+        if(!expiry) {
+            return true;
+        }
+        if(new Date().getTime() > expiry) {
+            localStorage.removeItem(TTL_KEY);
+            return true;
+        }
+        return false;
     }
 
-    if(!isDraftSubmission() || isNeverShow()) {
+    if(!isDraftSubmission() || !shouldShowPopup()) {
         return;
     }
 

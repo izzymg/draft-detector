@@ -10,14 +10,17 @@
 }
 
 .tca-draft-title-wrap {
-    background: white;
+    background: rgb(55, 155, 187);
     border: 2px solid hsl(0, 0%, 91%);
     border-bottom: 0;
     padding: 0.3em;
+    font-size: 1.1em;
+    color: #fff;
 }
 
 .tca-draft-body {
-    background: white;
+    color: hsl(0, 0%, 15%);
+    background: #fff;
     padding: 0.9em;
     border: 2px solid hsl(0, 0%, 91%);
 }

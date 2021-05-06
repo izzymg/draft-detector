@@ -13,7 +13,7 @@ Izzy MG, TCA LMS Admin
      * Returns true if current page has a draft submission on it.
     */
     function isDraftSubmission() {
-        return document.querySelector(".submissionstatusdraft") ? true : false;
+        return (document.body.id == "page-mod-assign-view" && document.querySelector(".submissionstatusdraft"));
     }
 
     /**
